@@ -116,16 +116,24 @@ export IP=10.10.49.176
 
 1) Metasploit comes with a built-in way to run nmap and feed it's results directly into our database. Let's run that now by using the command 'db_nmap -sV BOX-IP'
 
+	Command: `db_nmap -sV BOX-IP`
+
 2) What service does nmap identify running on port 135?
 
-	Command: `nmap -sV $IP`
+	Command: `db_nmap -sV $IP`
 	Answer: `msrpc`
 
 3) Let's go ahead and see what information we have collected in the database. Try typing the command 'hosts' into the msfconsole now.
 
+	Command: `hosts`
+
 4) How about something else from the database, try the command 'services' now.
 
+	Command: `services`
+
 5) One last thing, try the command 'vulns' now. This won't show much at the current moment, however, it's worth noting that Metasploit will keep track of discovered vulnerabilities. One of the many ways the database can be leveraged quickly and powerfully.
+
+	Command: `vulns`
 
 6) Now that we've scanned our victim system, let's try connecting to it with a Metasploit payload. First, we'll have to search for the target payload. In Metasploit 5 (the most recent version at the time of writing) you can simply type 'use' followed by a unique string found within only the target exploit. For example, try this out now with the following command 'use icecast'. What is the full path for our exploit that now appears on the msfconsole prompt? *This will include the exploit section at the start
 
