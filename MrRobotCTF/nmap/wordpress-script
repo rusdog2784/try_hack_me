@@ -1,0 +1,45 @@
+# Nmap 7.80 scan initiated Wed Aug 26 23:58:08 2020 as: nmap -sV --script http-wordpress-enum -oN nmap/wordpress-script 10.10.47.107
+Nmap scan report for 10.10.47.107
+Host is up (0.084s latency).
+Not shown: 997 filtered ports
+PORT    STATE  SERVICE  VERSION
+22/tcp  closed ssh
+80/tcp  open   http     Apache httpd
+|_http-server-header: Apache
+| http-wordpress-enum: 
+| Search limited to top 100 themes/plugins
+|   plugins
+|     akismet
+|     contact-form-7 4.1
+|     jetpack 3.3.2
+|     all-in-one-seo-pack 
+|     google-sitemap-generator 4.0.7.1
+|     google-analytics-for-wordpress 5.3.2
+|     wptouch 3.7.3
+|     all-in-one-wp-migration 2.0.4
+|     wp-mail-smtp 0.9.5
+|   themes
+|     twentythirteen 1.6
+|     twentyfourteen 1.5
+|_    twentyfifteen 1.3
+443/tcp open   ssl/http Apache httpd
+|_http-server-header: Apache
+| http-wordpress-enum: 
+| Search limited to top 100 themes/plugins
+|   plugins
+|     akismet
+|     contact-form-7 4.1
+|     jetpack 3.3.2
+|     all-in-one-seo-pack 
+|     google-sitemap-generator 4.0.7.1
+|     google-analytics-for-wordpress 5.3.2
+|     wptouch 3.7.3
+|     all-in-one-wp-migration 2.0.4
+|     wp-mail-smtp 0.9.5
+|   themes
+|     twentythirteen 1.6
+|     twentyfourteen 1.5
+|_    twentyfifteen 1.3
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Wed Aug 26 23:59:17 2020 -- 1 IP address (1 host up) scanned in 69.35 seconds

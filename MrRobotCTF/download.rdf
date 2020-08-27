@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><rdf:RDF
+	xmlns="http://purl.org/rss/1.0/"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:admin="http://webns.net/mvcb/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	>
+<channel rdf:about="http://10.10.47.107">
+	<title>user&#039;s Blog!</title>
+	<link>http://10.10.47.107</link>
+	<description>Just another WordPress site</description>
+	<dc:date></dc:date>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<sy:updateBase>2000-01-01T12:00+00:00</sy:updateBase>
+	<admin:generatorAgent rdf:resource="http://wordpress.org/?v=4.3.1" />
+	<items>
+		<rdf:Seq>
+				</rdf:Seq>
+	</items>
+</channel>
+</rdf:RDF>
