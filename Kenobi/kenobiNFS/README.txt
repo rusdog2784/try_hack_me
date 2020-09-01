@@ -1,0 +1,1 @@
+There WAS a mounted file share here, but I unmounted it because it was no longer needed and I didn't feel like uploading it on GIT. If you want to mount again, run the command: `mount $IP:/var ./kenobiNFS` in the Kenobi directory. Vice versa, to unmount, run: `umount ./kenobiNFS` or `umount -l ./kenobiNFS` (if busy).
