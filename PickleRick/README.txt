@@ -57,3 +57,7 @@ Username:		R1ckRul3s
 	
 	Command: `hydra -l R1ckRul3s -P /usr/share/wordlists/rockyou.txt $IP ssh`
 	Output: No dice. Doesn't support password login meaning it needs SSH.
+
+5) Apache servers most always have a /robots.txt file. Went to http://$IP/robots.txt and found:
+
+	Wubbalubbadubdub
