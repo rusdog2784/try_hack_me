@@ -1,4 +1,4 @@
-export IP=10.10.31.226
+export IP=10.10.240.253
 
 
 ==================================================
@@ -47,17 +47,21 @@ Username:		R1ckRul3s
 
   	-->
 
-3) Trying gobuster:
+3) Trying gobuster (After watching John Hammond, he includes file extenstions to look for):
 	
-	Command: `gobuster dir -u http://$IP -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt`
-	Output:
-		- /assets	->	contains files (potential reverse shell exploit?)
+	Command: `gobuster dir -u http://$IP -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,sh,txt,cgi,html,js,css,p -o gobuster.txt`
+	Output: See `gobuster.txt`
 
-4) Tried brute forcing into SSH using Hydra:
+4) Ran nikto for the first time...
+
+	Command: `nikto -h http://$IP | tee nikto.log`
+	Output: See `nikto.log`
+
+5) Tried brute forcing into SSH using Hydra:
 	
 	Command: `hydra -l R1ckRul3s -P /usr/share/wordlists/rockyou.txt $IP ssh`
 	Output: No dice. Doesn't support password login meaning it needs SSH.
 
-5) Apache servers most always have a /robots.txt file. Went to http://$IP/robots.txt and found:
+6) Apache servers most always have a /robots.txt file. Went to http://$IP/robots.txt and found:
 
 	Wubbalubbadubdub
