@@ -77,12 +77,21 @@ Translate, shift and decode the following:
 
 10) <See the file, task1-question10.txt for this question's text.>
 
-	Answer: ``
+	Answer: `Let's make this a bit trickier...`
 	Notes:
 		- Ok, think I figured it out, but don't have enough energy to implement or try it out. In order to solve, try the following:
 			1) Decode task1-question10.txt using base64 (saved as task1-question10-decoded-base64.txt).
 			2) Decode each line of task1-question10-decoded-base64.txt using morse code (saved as task1-question10-decoded-morse.txt).
 			3) Decode each line of task1-question10-decoded-morse.txt using binary and that should produce final answer.
+		- Ok, the problem goes a bit further than initially thought. As expected, question 10 is a combination of all the previous questions. I've completed the below steps, 1 through 3, using the python script, task1-question10-solver.py. The rest I used online decoders:
+			1) Decode <question text> using base64
+			2) Decode <step 1 result> using morse code
+			3) Decode <step 2 result> using binary
+				Result: fe `_` ``e bh ``d ba `_h hf `_f `_` ba ``e `_c `_d ``d ba hf ba hg `_d ``e ba ``e ``c `_d hh `_f `_d `_` ``c ce ce ce
+			4) Decode <step 3 result> using ROT47
+				Result: 76 101 116 39 115 32 109 97 107 101 32 116 104 105 115 32 97 32 98 105 116 32 116 114 105 99 107 105 101 114 46 46 46
+			5) Decode <step 4 result> using Simple Numbers to Letters (ASCII)
+				Result: `Let's make this a bit trickier...`
 
 
 ==================================================
