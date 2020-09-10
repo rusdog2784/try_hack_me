@@ -75,9 +75,14 @@ Translate, shift and decode the following:
 	Notes:
 		- Simple Numbers to ASCII letters. Online decoder: https://www.boxentriq.com/code-breaking/numbers-to-letters
 
-10) <For maintainability and readability, I am not posting the text in this README because its suuuuper long. So if you want to see it, check it out inside the TryHackMe room.>
+10) <See the file, task1-question10.txt for this question's text.>
 
 	Answer: ``
+	Notes:
+		- Ok, think I figured it out, but don't have enough energy to implement or try it out. In order to solve, try the following:
+			1) Decode task1-question10.txt using base64 (saved as task1-question10-decoded-base64.txt).
+			2) Decode each line of task1-question10-decoded-base64.txt using morse code (saved as task1-question10-decoded-morse.txt).
+			3) Decode each line of task1-question10-decoded-morse.txt using binary and that should produce final answer.
 
 
 ==================================================
