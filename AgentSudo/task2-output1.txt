@@ -1,0 +1,18 @@
+What are you doing! Are you one of the 25 employees? If not, I going to report this incident
+<!DocType html>
+<html>
+<head>
+	<title>Annoucement</title>
+</head>
+
+<body>
+<p>
+	Dear agents,
+	<br><br>
+	Use your own <b>codename</b> as user-agent to access the site.
+	<br><br>
+	From,<br>
+	Agent R
+</p>
+</body>
+</html>
