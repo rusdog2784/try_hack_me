@@ -98,29 +98,54 @@ Translate, shift and decode the following:
 
 [TASK 2] - Spectrograms
 
-1) 
+1) A spectrogram is a visual representation of the spectrum of frequencies of a signal as it varies with time. When applied to an audio signal, spectrograms are sometimes called sonographs, voiceprints, or voicegrams. When the data is represented in a 3D plot they may be called waterfalls. (See file `secretaudio.wav`)
+
+	Answer: `Super Secret Message`
+	Notes:
+		- Had to google "create spectrogram from wav" and found this article, "https://stackoverflow.com/questions/44787437/how-to-convert-a-wav-file-to-a-spectrogram-in-python3", which I used to create a small python program to create a spectogram.
+		- See file `task2-question1-solver.py`.
 
 
 ==================================================
 
 [TASK 3] - Steganography
 
-1) 
+1) Steganography is the practice of concealing a file, message, image, or video within another file, message, image, or video. (See file `stegosteg.jpg`)
+
+	Answer: `SpaghettiSteg`
+	Commands:
+		1) `apt-get install steghide`
+		2) `steghide info stegosteg.jpg` 
+			> gave me interesting details about the JPG
+		3) `steghide extract -sf stegosteg.jpg` 
+			> unpacked and created a new file, `steganopayload2248.txt`
+		4) `cat steganopayload2248.txt`
+	Notes:
+		- Had to google "steganography tools linux" and found this article, "https://0xrick.github.io/lists/stego/".
+		- Installed the bin module, steghide.
 
 
 ==================================================
 
 [TASK 4] - Security through obscurity
 
-1) 
+Security through obscurity is the reliance in security engineering on the secrecy of the design or implementation as the main method of providing security for a system or component of a system. (See file `meme.jpg`)
 
+1) Download and get 'inside' the file. What is the first filename & extension?
 
-==================================================
+	Answer: `hackerchat.png`
+	Commands:
+		1) `steghide info meme.jpg`
+			> didn't work because I needed a passphrase that I didn't know
+		2) `./steghide-crack.sh meme.jpg /usr/share/wordlists/rockyou.txt`
+			> didn't really finish, but while it was going I ran the following command...
+		3) `strings meme.jpg | awk 'length($0) > 8'
+			> gave me the answer, hackerchat.png, and some other stuff
+	Notes:
+		- Found an online steghide passphrase cracker shell script here, "https://github.com/felipesi/steghide-crack/blob/master/steghide-crack.sh"
+		- `strings` was the answer.
 
-[IMPORTANT INFORMATION]
+2) Get inside the archive and inspect the file carefully. Find the hidden text.
 
-
-==================================================
-
-[APPROACH]
-
+	Answer: `AHH_YOU_FOUND_ME!`
+	Command: `strings meme.jpg | awk 'length($0) > 8`
