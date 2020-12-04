@@ -5,11 +5,15 @@
 
 1. Use BurpSuite to brute force the login form.  Use the following lists for the default credentials:
 	
-| Usernames | Passwords	|<br>
-|-----------------------|<br>
-| root      | root      |<br>
-| admin     | password  |<br>
-| user      | 12345     |<br>
+	Usernames:
+	- root
+	- admin
+	- user
+
+	Passwords:
+	- root
+	- password
+	- 12345
 
 Use the correct credentials to log in to the Santa Sleigh Tracker app. Don't forget to turn off Foxyproxy once BurpSuite has finished the attack!
 
