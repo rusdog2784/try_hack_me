@@ -1,0 +1,11 @@
+# Nmap 7.91 scan initiated Sun Dec 13 17:15:38 2020 as: nmap --script http-title -oN nmap/http-title-script 10.10.131.115
+Nmap scan report for tbfc.blog (10.10.131.115)
+Host is up (0.088s latency).
+Not shown: 997 closed ports
+PORT     STATE SERVICE
+80/tcp   open  http
+|_http-title: TBFC&#39;s Internal Blog
+2222/tcp open  EtherNetIP-1
+3389/tcp open  ms-wbt-server
+
+# Nmap done at Sun Dec 13 17:15:40 2020 -- 1 IP address (1 host up) scanned in 1.87 seconds

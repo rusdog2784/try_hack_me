@@ -1,7 +1,7 @@
 # IP=10.10.165.183
 
 
-### [Day 5] Web Exploitation - Be careful with what you wish on a Christmas night ###
+### [Day 6] Web Exploitation - Be careful with what you wish on a Christmas night ###
 
 1. What vulnerability type was used to exploit the application?
 
