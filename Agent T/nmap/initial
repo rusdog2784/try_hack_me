@@ -1,0 +1,12 @@
+# Nmap 7.92 scan initiated Mon Sep 19 19:05:07 2022 as: nmap -sV -sC -oN nmap/initial 10.10.227.220
+Nmap scan report for 10.10.227.220
+Host is up (0.085s latency).
+Not shown: 997 closed tcp ports (conn-refused)
+PORT      STATE    SERVICE VERSION
+80/tcp    open     http    PHP cli server 5.5 or later (PHP 8.1.0-dev)
+|_http-title:  Admin Dashboard
+6004/tcp  filtered X11:4
+57797/tcp filtered unknown
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Mon Sep 19 19:05:23 2022 -- 1 IP address (1 host up) scanned in 15.45 seconds
