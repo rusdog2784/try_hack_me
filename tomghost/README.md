@@ -1,4 +1,4 @@
-# [Agent T](https://tryhackme.com/room/tomghost)
+# [tomghost](https://tryhackme.com/room/tomghost)
 
 ```
 export IP=10.10.154.147
